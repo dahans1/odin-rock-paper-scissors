@@ -10,4 +10,9 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice())
+function getHumanChoice() {
+    let choice = prompt("Enter a valid choice (rock, paper, scissors): ")
+    return choice.toLowerCase()
+}
+
+console.log(getHumanChoice())
