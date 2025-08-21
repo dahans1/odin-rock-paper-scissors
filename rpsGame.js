@@ -1,3 +1,6 @@
+var humanScore = 0
+var computerScore = 0
+
 function getComputerChoice() {
     let num = Math.random()
     
@@ -14,5 +17,3 @@ function getHumanChoice() {
     let choice = prompt("Enter a valid choice (rock, paper, scissors): ")
     return choice.toLowerCase()
 }
-
-console.log(getHumanChoice())
