@@ -13,10 +13,13 @@ function getComputerChoice() {
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let roundsLeft = 5;
 
     function playRound(humanChoice, computerChoice) {
-        const scoreboard = document.querySelector('.scoreboard');
+        const rounds = document.querySelector('.rounds');
+        const scoreboard = document.querySelector('#scoreboard');
         const result = document.createElement('p');
+        roundsLeft -= 1;
 
         if (humanChoice == computerChoice) {
             result.textContent = `Tie! Both players chose ${humanChoice}`;
@@ -50,20 +53,36 @@ function playGame() {
                     }
                     break;
                 default:
+                    roundsLeft += 1;
                     break;
             }
         }
 
-        scoreboard.appendChild(result);
+        rounds.appendChild(result);
+        scoreboard.textContent = `Human: ${humanScore} - Computer ${computerScore}`;
+
+        if (roundsLeft == 0) {
+            const finalResult = document.createElement('h1');
+            if (humanScore > computerScore) {
+                finalResult.textContent = (`You win! Score: ${humanScore}.`)
+            } else if (humanScore < computerScore) {
+                finalResult.textContent = (`You lose! Score: ${humanScore}`)
+            } else {
+                finalResult.textContent = (`It's a tie! Score: ${humanScore}`)
+            }
+            rounds.appendChild(finalResult);
+        }
     }
 
     buttons = document.querySelector(".rps-buttons");
 
     buttons.addEventListener('click', (e) => {
-        let target = e.target;
-        let computerChoice = getComputerChoice();
+        if (roundsLeft > 0) {
+            let target = e.target;
+            let computerChoice = getComputerChoice();
 
-        playRound(target.id, computerChoice);
+            playRound(target.id, computerChoice);
+        }
     });
 
     // for (let i = 0; i < 5; i++) {
