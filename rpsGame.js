@@ -57,12 +57,22 @@ function playGame() {
         }
     }
 
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice()
-        const computerSelection = getComputerChoice()
+    buttons = document.querySelector(".rps-buttons");
 
-        playRound(humanSelection, computerSelection)
-    }
+    buttons.addEventListener('click', (e) => {
+        let target = e.target;
+        let computerChoice = getComputerChoice();
+
+        playRound(target.id, computerChoice);
+    });
+
+
+    // for (let i = 0; i < 5; i++) {
+    //     const humanSelection = getHumanChoice()
+    //     const computerSelection = getComputerChoice()
+
+    //     playRound(humanSelection, computerSelection)
+    // }
 
     if (humanScore > computerScore) {
         console.log(`You win! Score: ${humanScore}.`)
